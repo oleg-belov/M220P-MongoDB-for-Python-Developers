@@ -60,7 +60,7 @@ def get_movies_by_country(countries):
         match one or more values of a specific field.
         """
 
-        # TODO: Projection
+        # : Projection
         # Find movies matching the "countries" list, but only return the title
         # and _id.
         return list(db.movies.find({ "countries" : { "$in" : countries } }, { "title" : 1 }))
@@ -177,9 +177,9 @@ def build_query_sort_project(filters):
             searches MongoDB for movies with that genre.
             """
 
-            # TODO: Text and Subfield Search
+            # : Text and Subfield Search
             # Construct a query that will search for the chosen genre.
-            query = {}
+            query = {"genres": {"$in": filters["genres"]}}
 
     return query, sort, project
 
