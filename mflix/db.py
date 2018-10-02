@@ -348,7 +348,7 @@ def update_comment(comment_id, user_email, text, date):
     based by both comment _id field as well as the email field to doubly ensure
     the user has permission to edit this comment.
     """
-    # TODO: Create/Update Comments
+    # : Create/Update Comments
     # use the user_email and comment_id to select the proper comment
     # then update the "text" and "date" of the selected comment
     response = db.comments.update_one(
@@ -372,9 +372,9 @@ def delete_comment(comment_id, user_email):
     this user has permission to delete this comment, and then delete it.
     """
 
-    # TODO: Delete Comments
+    # : Delete Comments
     # use the user_email and comment_id to delete the proper comment
-    response = db.comments.delete_one({"some_field": "some_value"})
+    response = db.comments.delete_one({"_id": comment_id, "email": user_email})
     return response
 
 
