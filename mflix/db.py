@@ -249,12 +249,24 @@ def get_movie(id):
         Embed the joined comments in a new field called "comments".
         """
 
-        # TODO: Get Comments
+        # : Get Comments
         # implement the required pipeline
         pipeline = [
             {
                 "$match": {
                     "_id": ObjectId(id)
+                }
+            },
+            {
+                "$lookup": {
+                    "from": 'comments',
+                    "let": { 'id': '$_id' },
+                    "pipeline": [
+                        { '$match':
+                            { '$expr': { '$eq': [ '$movie_id', '$$id' ] } }
+                        }
+                    ],
+                    "as": 'comments'
                 }
             }
         ]
